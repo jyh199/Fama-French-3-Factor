@@ -1,4 +1,3 @@
-import os
 import wrds
 import datetime as dt
 import pandas as pd
@@ -7,9 +6,8 @@ import pandas_datareader
 import matplotlib.pyplot as plt
 from pandas.tseries.offsets import MonthEnd
 
-# Question 1
 
-# load data
+# load data from WRDS
 
 data_folder = 'D:/MY/UCLA/Academic/2022 spring/QAM/data/'  
 id_wrds = 'jessie_jyh'  
@@ -121,7 +119,6 @@ ps4_dlret.to_csv(data_folder + 'ps4_dlret.csv')
 french.to_csv(data_folder + 'french.csv')
 
 ## read csv
-os.chdir("D:/MY/UCLA/Academic/2022 spring/QAM/data/")
 cstat = pd.read_csv('cstat.csv')
 Pension = pd.read_csv('Pension.csv')
 crsp_link = pd.read_csv('crsp_link.csv')
@@ -342,9 +339,8 @@ Q1['Month'] = Q1['date'].dt.month
 Q1 = Q1[['date','Year','Month','ME_decile','Size_Ret',
          'BEME_decile','BtM_Ret','HML','SMB']]
 
-# Question 2&3
+# Statistics of 10 size & 10 B/E portfolio returns 
 
-# 10*10 portfolios
 FF['date'] = pd.to_datetime(FF['date'])
 FF = FF[(FF['date'].dt.year < 2022) &
         (FF['date'].dt.year > 1972)].reset_index(drop=True)
@@ -430,7 +426,7 @@ plt.legend()
 plt.title('Book-to-Market decile portfolio cumulative log returns')
 plt.show()
 
-# Question 5
+# Correlations between my replication and the data from the website
 
 corr_ff3 = pd.DataFrame(index=['HML','SMB'], columns=['correlation'])
 ff3_charac = pd.DataFrame(columns=['Annual_EXRet(%)','Annual_vol(%)','SR','Skew'],
